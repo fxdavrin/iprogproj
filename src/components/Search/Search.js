@@ -22,7 +22,7 @@ class SearchPage extends Component {
     this.renderMenuItemChildren = this.renderMenuItemChildren.bind(this);
   }
 
-
+// HAHA
   componentDidMount() {
 
     this.fetchApiData(this.state.searchUrl);
