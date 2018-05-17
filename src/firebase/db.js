@@ -32,25 +32,42 @@ export const onCommentAdded = (callback) =>
     .on('child_added', callback);
 
 
-
 // Favorites //
 
-// Funkar inte!
-export function doRemoveFavorites(movieId, userId) {
-  const fav = db.ref('favorites').equalTo(movieId, userId)
-  fav.remove();
-}
+// Remove favorite. Saknas error om film ej finns bland favoriter. 
+export const doRemoveFavorites = (movieId, userId) =>
+db.ref('favorites').once('value', snapshot => {
+  var key = Object.keys(snapshot.val())
+  key.map((key) => {
+    db.ref('favorites/' + key + '/').once('value', snapshot => {
+      var fav = snapshot.val();
+      if(fav.movieId == movieId) {
+        db.ref('favorites/' + key + '/').once('value', snapshot => {
+          var newfav = snapshot.val();
+          if (newfav.userId == userId) {
+            db.ref('favorites/' + key + '/').once('value', snapshot => {
+              var thisfav = snapshot.val();
+              db.ref('favorites/' + key).remove();
+            })
+          } 
+        })
+      }
+    })
+  })
+})
 
   
-// Behöver kolla om den redan finns i favoriter innan den lägger till
+// Kolla om den redan finns i favoriter innan den lägger till
 export const doAddFavorites = (movieId, title, plot, poster, userId) =>
-  db.ref('favorites').push({
-    movieId,
-    title,
-    plot,
-    poster,
-    userId 
+db.ref('favorites').push({
+  movieId,
+  title,
+  plot,
+  poster,
+  userId 
 });
+
+
 
 // Sorterat på userId och tar fram favoriter med den inloggades Id
 export const onFavoriteAdded = (callback) =>

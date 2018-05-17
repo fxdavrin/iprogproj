@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
 
@@ -8,12 +7,11 @@ import { db } from '../../firebase';
 class Comments extends Component {
   constructor() {
     super();
-
     this.state = {
       value: '',
       comments: [],
       users: {},
-      movieId: '',
+      movieId: [],
     };
 
     this.onAddComment = this.onAddComment.bind(this);
@@ -30,6 +28,7 @@ class Comments extends Component {
         comments: [ snapshot.val(), ...prevState.comments ],
       }));
     });
+
   }
 
   onChangeComment(event) {
@@ -42,8 +41,10 @@ class Comments extends Component {
 
     const { authUser } = this.context;
     const { value } = this.state;
+    const { movieId } = this.props.data.imdbID;
+  
 
-    db.doCreateComment(authUser.uid, value);
+    db.doCreateComment(authUser.uid, value, movieId)
     this.setState(() => ({ value: ''  }));
   }
 
@@ -55,6 +56,7 @@ class Comments extends Component {
       comments,
       users,
       value,
+      movieId
     } = this.state;
 
     return (

@@ -14,7 +14,7 @@ class SearchPage extends Component {
     super(props);
     this.state = {
       searchInput: '',
-      searchUrl: 'http://www.omdbapi.com/?t=gomorrah&apikey=233c506f'
+      searchUrl: 'https://www.omdbapi.com/?t=gomorrah&apikey=233c506f'
     };
     this.doSearch = this.doSearch.bind(this);
     this.submit = this.submit.bind(this);
@@ -22,14 +22,15 @@ class SearchPage extends Component {
     this.renderMenuItemChildren = this.renderMenuItemChildren.bind(this);
   }
 
+
   componentDidMount() {
 
     this.fetchApiData(this.state.searchUrl);
-    
+
   }
 
   fetchApiData(url){
-    fetch(url) 
+    fetch(url)
       .then((result) => {
         return result.json()
       })
@@ -68,7 +69,7 @@ class SearchPage extends Component {
     if (!query) {
       return;
     }
-    this.fetchApiData(`http://www.omdbapi.com/?t=${query}&apikey=233c506f`);
+    this.fetchApiData(`https://www.omdbapi.com/?t=${query}&apikey=233c506f`);
   }
 
   doSearch(query) {
@@ -76,7 +77,7 @@ class SearchPage extends Component {
       return;
     }
 
-    fetch(`http://www.omdbapi.com/?s=${query}&apikey=233c506f`)
+    fetch(`https://www.omdbapi.com/?s=${query}&apikey=233c506f`)
       .then((result) => {
         return result.json()
       })
@@ -95,27 +96,26 @@ class SearchPage extends Component {
     );
   }
 
+
   addFavorite() {
     db.doAddFavorites(this.state.imdbID, this.state.title, this.state.plot, this.state.posterUrl, firebase.auth.currentUser.uid)
-          .then(() => {
-            console.log('added')
-          })
-          .catch(error => {
-            this.setState('error', error);
-          });
-        }
+      .then(() => {
+      })
+      .catch(error => {
+        this.setState('error', error);
+      });
+  }
 
     removeFavorite() {
       db.doRemoveFavorites(this.state.imdbID, firebase.auth.currentUser.uid)
         .then(() => {
-            console.log('deleted')
-                })
-                .catch(error => {
-                  this.setState('error', error);
-                });
-              }
+        })
+        .catch(error => {
+          this.setState('error', error);
+        });
 
-  
+  }
+
 
 
   render() {
@@ -129,7 +129,7 @@ class SearchPage extends Component {
               <div className="search-text">Search for a movie</div>
               </div>
               <div className="col-xs-12 col-sm-6 col-lg-7">
-                
+
                   <AsyncTypeahead
                     ref="typeahead"
                     {...this.state}
@@ -140,17 +140,17 @@ class SearchPage extends Component {
                     className="search-input-box"
                     renderMenuItemChildren={this.renderMenuItemChildren}
                   />
-                  
+
               </div>
             </div>
           </div>
 
-          <MoviePage data={this.state} /> 
+          <MoviePage data={this.state} />
 
           <Link to={'/favorites'} key={this.state}>
           <button onClick={() => this.addFavorite() }>ADD TO FAV</button>
           </Link>
-          
+
           <button onClick={() => this.removeFavorite() }>REMOVE FAV</button>
 
           <Comments data={this.state}/>
@@ -166,4 +166,3 @@ class SearchPage extends Component {
 const authCondition = (authUser) => !!authUser;
 
 export default withAuthorization(authCondition)(SearchPage);
-

@@ -2,33 +2,14 @@ import React, { Component } from 'react';
 import { firebase } from '../../firebase';
 import './Movie.css';
 
-
-
 class MoviePage extends Component {
 
-	constructor() {
-		super()
-		this.state = {
-			isOpen: false,
-			isFav: false
-		}
-		this.openModal = this.openModal.bind(this)
-	}
-
-	openModal(){
-		this.setState({isOpen: true})
-	}
-	
 	getMovieInfo() {
 		let info = (
-	
         this.props.data.response === "True"? 
 	            <div className="col-xs-12 movie-container">
 	              <div className="col-xs-12 col-md-8 col-md-push-4 col-lg-7 col-lg-push-5 movie-details">
-								
 									<h1>{this.props.data.title}</h1>
-						
-									
 	                <p>{this.props.data.plot}</p>
 	                <div className="genre-details">
 	                  <div className="genres">
@@ -60,10 +41,7 @@ class MoviePage extends Component {
 	              </div>
 								<div className="col-xs-12 add-to-list">
             	</div>
-        	
 	            </div>
-					
-							
 	            : 
 	            <div className="error">
 	              {this.props.data.response === "False"? <h3>No Movie Found</h3> : null}
@@ -71,28 +49,12 @@ class MoviePage extends Component {
 							return info;
 					}
 
-			getUser() {
-						return firebase.auth.currentUser.uid;
-
-								}
-
-					
-				componentDidMount() {
-					console.log(this.getUser());
-
-				
-				
-			}
-
-			render() {
+		render() {
 		
-		 
 		 return ( 
 			<div> 
 			{this.getMovieInfo()} 
-		
 			</div>
-			
 		)
 	}
 }
