@@ -1,0 +1,49 @@
+body {
+    background:white;
+  }
+
+.movie-container {
+    background-color: white;
+    padding: 0;
+  }
+
+.movie-details {
+    color: black;
+    padding-bottom: 15px;
+  }
+
+.actors h3, .genres h3, .language h3, .writer h3 {
+    color: #666666;
+    margin-bottom: 4px;
+  }
+
+.actors, .genres, .release-details {
+    margin-top: 20px;
+  }
+
+.details-title {
+    color: #666666;
+    font-size: 15px;
+  }
+  
+.release-data {
+    display: block;
+    font-size: 15px;
+    padding-bottom: 5px;
+  }
+
+.poster {
+    width: 100%;
+  }
+  
+.poster-container {
+    padding: 0px;
+  }
+  
+.error {
+    text-align: center;
+    color: red;
+  }
+.add-to-list {
+  padding: 10px;
+}

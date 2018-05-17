@@ -1,0 +1,49 @@
+
+* {margin: 0; padding: 0;}
+
+.list-title {
+    font: bold 25px/1.5 Helvetica, Verdana, sans-serif;
+    margin-left: 10px;
+}
+.lists {
+  margin: 20px;
+}
+
+.movie-link {
+  color: black;
+}
+
+.movie-link:hover {
+  color: black;
+  text-decoration: none;
+}
+ 
+.list-list {
+  list-style-type: none;
+  width: 500px;
+}
+ 
+h3 {
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+}
+ 
+.movie-list-container img {
+  float: left;
+  margin: 0 15px 0 0;
+  width: 35% ;
+  height: auto;
+}
+ 
+.movie-list-container p {
+  font: 200 12px/1.5 Georgia, Times New Roman, serif;
+}
+ 
+.movie-list-container {
+  padding: 10px;
+  overflow: auto;
+}
+ 
+.movie-list-container:hover {
+  background: #eee;
+  cursor: pointer;
+}
