@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { firebase } from '../../firebase';
 import './Movie.css';
 
 class MoviePage extends Component {
@@ -45,7 +44,8 @@ class MoviePage extends Component {
 	            : 
 	            <div className="error">
 	              {this.props.data.response === "False"? <h3>No Movie Found</h3> : null}
-							</div>);
+							</div>
+							);
 							return info;
 					}
 

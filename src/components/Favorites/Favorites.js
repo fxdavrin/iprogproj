@@ -13,7 +13,9 @@ class Favorites extends Component {
     };
   }
 
+
   componentWillMount() {
+
     db.onFavoriteAdded((snapshot) => {
       this.setState((prevState) => ({
         favorites: [ snapshot.val(), ...prevState.favorites],
@@ -22,7 +24,7 @@ class Favorites extends Component {
     });
   }
 
-  
+
   render() {
     const { favorites } = this.state;
     return (
@@ -45,13 +47,11 @@ const Fav = ({ favs }) => {
 
       <div className="col-xs-5 lists">
       <ul className="list-list">
-      <Link className="movie-link" to={'/search'}>
       <li className="movie-list-container">
       <img src={favs.poster} alt="foto" />
       <h3>{favs.title}</h3>
       <p>{favs.plot}</p>
       </li>
-      </Link>
       </ul>
       </div>
 

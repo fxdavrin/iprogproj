@@ -24,7 +24,6 @@ const NavigationAuth = () =>
 <div className="navbar">
       <a href="./search">SEARCH</a>
       <a href="./favorites">MY FAVORITE MOVIES</a>
-      <a href="./create">CHAT</a>
       <a className="signout" href="./signout">SIGN OUT</a>
 </div>
 </div>

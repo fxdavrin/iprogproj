@@ -1,6 +1,5 @@
 import { auth, db } from './firebase';
 
-
 // User //
 
 export const doCreateUser = (id, username, email) =>
@@ -41,12 +40,11 @@ db.ref('favorites').once('value', snapshot => {
   key.map((key) => {
     db.ref('favorites/' + key + '/').once('value', snapshot => {
       var fav = snapshot.val();
-      if(fav.movieId == movieId) {
+      if(fav.movieId === movieId) {
         db.ref('favorites/' + key + '/').once('value', snapshot => {
           var newfav = snapshot.val();
-          if (newfav.userId == userId) {
+          if (newfav.userId === userId) {
             db.ref('favorites/' + key + '/').once('value', snapshot => {
-              var thisfav = snapshot.val();
               db.ref('favorites/' + key).remove();
             })
           } 
@@ -56,8 +54,7 @@ db.ref('favorites').once('value', snapshot => {
   })
 })
 
-  
-// Kolla om den redan finns i favoriter innan den lägger till
+// Add Favorite. Saknas koll om den redan finns i favoriter.
 export const doAddFavorites = (movieId, title, plot, poster, userId) =>
 db.ref('favorites').push({
   movieId,
@@ -67,8 +64,6 @@ db.ref('favorites').push({
   userId 
 });
 
-
-
 // Sorterat på userId och tar fram favoriter med den inloggades Id
 export const onFavoriteAdded = (callback) =>
   db.ref('favorites')
@@ -76,6 +71,3 @@ export const onFavoriteAdded = (callback) =>
     .equalTo(auth.currentUser.uid)
     .limitToLast(100)
     .on('child_added', callback);
-
-
-
