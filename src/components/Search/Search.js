@@ -19,7 +19,7 @@ class SearchPage extends Component {
       movieId: '',
       value: '',
       searchInput: '',
-      searchUrl: 'http://www.omdbapi.com/?t=gomorrah&apikey=233c506f'
+      searchUrl: 'https://www.omdbapi.com/?t=gomorrah&apikey=233c506f'
     };
 
     this.onAddComment = this.onAddComment.bind(this);
@@ -29,7 +29,7 @@ class SearchPage extends Component {
     this.fetchApiData = this.fetchApiData.bind(this);
     this.renderMenuItemChildren = this.renderMenuItemChildren.bind(this);
   }
-  
+
 
   componentDidMount() {
     this.fetchApiData(this.state.searchUrl);
@@ -41,7 +41,7 @@ class SearchPage extends Component {
 
 
   fetchApiData(url){
-    fetch(url) 
+    fetch(url)
       .then((result) => {
         return result.json()
       })
@@ -85,15 +85,15 @@ class SearchPage extends Component {
       .catch((err) => {
         console.log(err);
       })
-  } 
+  }
 
   submit(query){
     if (!query) {
-      
+
       return;
     }
-   
-    this.fetchApiData(`http://www.omdbapi.com/?t=${query}&apikey=233c506f`);
+
+    this.fetchApiData(`https://www.omdbapi.com/?t=${query}&apikey=233c506f`);
 
   }
 
@@ -102,7 +102,7 @@ class SearchPage extends Component {
       return;
     }
 
-    fetch(`http://www.omdbapi.com/?s=${query}&apikey=233c506f`)
+    fetch(`https://www.omdbapi.com/?s=${query}&apikey=233c506f`)
       .then((result) => {
         return result.json()
       })
@@ -139,7 +139,7 @@ class SearchPage extends Component {
         .catch(error => {
           this.setState('error', error);
         });
-  
+
   }
 
   onChangeComment(event) {
@@ -152,16 +152,16 @@ class SearchPage extends Component {
 
     //const { authUser } = this.context;
     const { value } = this.state;
-  
+
 
     db.doCreateComment(firebase.auth.currentUser.uid, value, this.state.imdbID)
     this.setState(() => ({ value: ''  }));
-  } 
-  
+  }
 
-  
 
-  
+
+
+
   render() {
     const {
       comments,
@@ -178,7 +178,7 @@ class SearchPage extends Component {
               <div className="search-text">Search for a movie</div>
               </div>
               <div className="col-xs-12 col-sm-6 col-lg-7">
-                
+
                   <AsyncTypeahead
                     ref="typeahead"
                     {...this.state}
@@ -189,7 +189,7 @@ class SearchPage extends Component {
                     className="search-input-box"
                     renderMenuItemChildren={this.renderMenuItemChildren}
                   />
-                  
+
               </div>
             </div>
           </div>
@@ -199,7 +199,7 @@ class SearchPage extends Component {
           <Link to={'/favorites'} key={this.state}>
           <button onClick={() => this.addFavorite() }>ADD TO FAV</button>
           </Link>
-          
+
           <button onClick={() => this.removeFavorite() }>REMOVE FAV</button>
 
           <div>
@@ -224,8 +224,8 @@ class SearchPage extends Component {
               onChange={this.onChangeComment}
               />
             <br></br>
-            <button type="submit">Save</button>
-          </form> 
+            <button type="submit">COMMENT</button>
+          </form>
 
           </div>
 
@@ -251,4 +251,3 @@ const Lists = ({ list, user }) => {
 const authCondition = (authUser) => !!authUser;
 
 export default withAuthorization(authCondition)(SearchPage);
-
