@@ -1,3 +1,7 @@
+# Cinemania
+
+How to set up: 
+
 # react-firebase-authentication
 
 [![Build Status](https://travis-ci.org/rwieruch/react-firebase-authentication.svg?branch=master)](https://travis-ci.org/rwieruch/react-firebase-authentication)
